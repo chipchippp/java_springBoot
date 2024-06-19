@@ -1,7 +1,7 @@
 package com.example.javaspring_web;
 
-import com.example.javaspring_web.dao.ClassRoomDAO;
 import com.example.javaspring_web.entity.ClassRoom;
+import com.example.javaspring_web.services.ClassRoomService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,12 +15,12 @@ public class JavaSpringWebApplication {
 //        System.out.println("Hello World!");
     }
     @Bean
-    public CommandLineRunner commandLineRunner(ClassRoomDAO classRoomDAO) {
+    public CommandLineRunner commandLineRunner(ClassRoomService classRoomService) {
         return args -> {
-            getClassById(classRoomDAO);
-            addNewClass(classRoomDAO);
-            updateClass(classRoomDAO);
-            deleteClass(classRoomDAO);
+            getClassById(classRoomService);
+            addNewClass(classRoomService);
+            updateClass(classRoomService);
+            deleteClass(classRoomService);
         };
     }
 //    @Bean
@@ -35,25 +35,25 @@ public class JavaSpringWebApplication {
 //            }
 //        };
 //    }
-    private static void addNewClass(ClassRoomDAO classRoomDAO) {
+    private static void addNewClass(ClassRoomService classRoomDAO) {
         ClassRoom classRoom = new ClassRoom();
         classRoom.setName("A");
         classRoom.setNumberRoom(1);
         classRoomDAO.saveClassRoom(classRoom);
     }
 
-    private static void getClassById(ClassRoomDAO classRoomDAO) {
+    private static void getClassById(ClassRoomService classRoomDAO) {
         ClassRoom classRoom = classRoomDAO.getClassRoomById(1L);
         for (ClassRoom c : classRoomDAO.getAllClassRoom()) {
             System.out.println(c.toString());
         }
     }
-    private static void updateClass(ClassRoomDAO classRoomDAO) {
+    private static void updateClass(ClassRoomService classRoomDAO) {
         ClassRoom classRoom = classRoomDAO.getClassRoomById(1L);
         classRoom.setName("B");
         classRoomDAO.updateClassRoom(classRoom);
     }
-    private static void deleteClass(ClassRoomDAO classRoomDAO) {
+    private static void deleteClass(ClassRoomService classRoomDAO) {
         classRoomDAO.deleteClassRoom(1L);
     }
 

@@ -1,7 +1,7 @@
 package com.example.javaspring_web.controllers;
 
-import com.example.javaspring_web.dao.ClassRoomDAO;
 import com.example.javaspring_web.entity.ClassRoom;
+import com.example.javaspring_web.services.ClassRoomService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,32 +9,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/classroom")
 public class ClassRoomController{
-    private final ClassRoomDAO classRoomDAO;
-
-    public ClassRoomController(ClassRoomDAO classRoomDAO) {
-        this.classRoomDAO = classRoomDAO;
+       private final ClassRoomService classRoomService;
+    public ClassRoomController(ClassRoomService classRoomDAO) {
+        this.classRoomService = classRoomDAO;
     }
     @GetMapping
     public List<ClassRoom> getAllClassRooms() {
-        return classRoomDAO.getAllClassRoom();
+        return classRoomService.getAllClassRoom();
     }
     @GetMapping("/{id}")
     public ClassRoom getClassRoomById(@PathVariable Long id) {
-        return classRoomDAO.getClassRoomById(id);
+        return classRoomService.getClassRoomById(id);
     }
 
     @PostMapping
     public void addClassRoom(@RequestBody ClassRoom classRoom){
-        classRoomDAO.saveClassRoom(classRoom);
+        classRoomService.saveClassRoom(classRoom);
     }
 
     @PutMapping("/{id}")
     public void updateClassRoom(@PathVariable Long id, @RequestBody ClassRoom classRoom){
-        ClassRoom existingClassRoom = classRoomDAO.getClassRoomById(id);
+        ClassRoom existingClassRoom = classRoomService.getClassRoomById(id);
         if (existingClassRoom != null) {
             existingClassRoom.setName(classRoom.getName());
             existingClassRoom.setNumberRoom(classRoom.getNumberRoom());
-            classRoomDAO.updateClassRoom(existingClassRoom);
+            classRoomService.updateClassRoom(existingClassRoom);
         } else {
             throw new RuntimeException("ClassRoom with id " + id + " not found");
         }
@@ -42,6 +41,6 @@ public class ClassRoomController{
 
     @DeleteMapping("/{id}")
     public void deleteClassRoom(@PathVariable Long id){
-        classRoomDAO.deleteClassRoom(id);
+        classRoomService.deleteClassRoom(id);
     }
 }
