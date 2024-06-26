@@ -31,11 +31,19 @@ public class ClassRoomService implements IClassRoomService{
     }
 
     @Override
-    public void updateClassRoom(ClassRoom classRoom) {
+    public void updateClassRoom(Long id, ClassRoom classRoom) {
+        ClassRoom classRoom1 = classRoomRepository.findById(id).orElse(null);
+        if (classRoom1 != null) {
+            classRoom1.setId(classRoom.getId());
+            classRoom1.setName(classRoom.getName());
+            classRoom1.setNumberRoom(classRoom.getNumberRoom());
+            classRoomRepository.save(classRoom1);
+        }
     }
 
     @Override
-    public void deleteClassRoom(Long id) {
+    public String deleteClassRoom(Long id) {
         classRoomRepository.deleteById(id);
+        return "ClassRoom with id " + id + " has been deleted.";
     }
 }

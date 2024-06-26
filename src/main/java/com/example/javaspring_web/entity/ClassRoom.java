@@ -44,11 +44,4 @@ public class ClassRoom {
         this.numberRoom = numberRoom;
     }
 
-    @Override
-    public String toString() {
-        return
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", numberRoom=" + numberRoom;
-    }
 }

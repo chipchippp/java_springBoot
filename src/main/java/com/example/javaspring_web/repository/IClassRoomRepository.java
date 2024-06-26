@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IClassRoomRepository extends JpaRepository<ClassRoom, Long> {
     ClassRoom findByName(String name);
+    ClassRoom findByNumberRoom(int numberRoom);
 
 }

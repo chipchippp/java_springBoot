@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/classroom")
+@RequestMapping("/api/classroom")
 public class ClassRoomController{
-       private final ClassRoomService classRoomService;
+    private final ClassRoomService classRoomService;
+
     public ClassRoomController(ClassRoomService classRoomDAO) {
         this.classRoomService = classRoomDAO;
     }
@@ -33,7 +34,7 @@ public class ClassRoomController{
         if (existingClassRoom != null) {
             existingClassRoom.setName(classRoom.getName());
             existingClassRoom.setNumberRoom(classRoom.getNumberRoom());
-            classRoomService.updateClassRoom(existingClassRoom);
+            classRoomService.updateClassRoom(id, existingClassRoom);
         } else {
             throw new RuntimeException("ClassRoom with id " + id + " not found");
         }

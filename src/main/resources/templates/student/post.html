@@ -39,14 +39,23 @@
         </div>
     </div>
 </nav>
-<form action="/room/addRoom" method="post">
+<form th:object="${student}" method="post" action="/student/addStudent">
     <div class="mb-3">
         <label for="exampleInputName" class="form-label">Name</label>
         <input type="text" class="form-control" id="exampleInputName" name="name">
     </div>
     <div class="mb-3">
-        <label for="exampleInputNumber" class="form-label">Number</label>
-        <input type="number" class="form-control" id="exampleInputNumber" name="numberRoom" aria-describedby="numberHelp">
+        <label for="exampleInputNumber" class="form-label">Age</label>
+        <input type="number" class="form-control" id="exampleInputNumber" name="age" aria-describedby="numberHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputNumber" class="form-label">ClassRoom</label>
+        <select class="form-control" id="classRoom" name="classRoom_id" aria-describedby="numberHelp">
+            <option value="">Select a Class Room</option>
+            <option th:each="classRoom : ${classRooms}"
+                    th:value="${classRoom.id}"
+                    th:text="${classRoom.name}"></option>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

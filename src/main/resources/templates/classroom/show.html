@@ -39,18 +39,32 @@
         </div>
     </div>
 </nav>
-<form action="/room/addRoom" method="post">
-    <div class="mb-3">
-        <label for="exampleInputName" class="form-label">Name</label>
-        <input type="text" class="form-control" id="exampleInputName" name="name">
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputNumber" class="form-label">Number</label>
-        <input type="number" class="form-control" id="exampleInputNumber" name="numberRoom" aria-describedby="numberHelp">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
+<h1>Students</h1>
+<a th:href="@{/room/addRoom}">New ClassRoom</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">NumberRoom</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="classRoom, count : ${classRooms}">
+        <th scope="row" th:text="${count.count}"></th>
+        <td th:text="${classRoom.name}"></td>
+        <td th:text="${classRoom.numberRoom}"></td>
+        <td>
+            <a th:href="@{'/room/edit/' + ${classRoom.id}}">Edit</a>
+            <form th:action="@{/room/delete/{id}(id=${classRoom.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this student?')">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-body-tertiary text-muted">
     <!-- Section: Social media -->
@@ -173,6 +187,6 @@
     <!-- Copyright -->
 </footer>
 <!-- Footer -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

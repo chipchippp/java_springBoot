@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/hello-servlet}">Hello</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/room}">ClassRoom</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/student}">Students</a>
@@ -56,11 +56,10 @@
         <td th:text="${classRoom.name}"></td>
         <td th:text="${classRoom.numberRoom}"></td>
         <td>
-            <a th:href="@{'/edit' + ${classRoom.id}}">Edit</a>
-            <form th:action="@{/classRoom}" method="post" onsubmit="return confirm('Are you sure you want to delete this student?')">
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="id" th:value="${classRoom.id}">
-                <button type="submit">Delete</button>
+            <a  class="btn btn-primary" th:href="@{'/room/edit/' + ${classRoom.id}}">Edit</a>
+            <form id="deleteForm" th:action="@{'/room/delete/' + ${classRoom.id}(id=${classRoom.id})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
         </td>
     </tr>

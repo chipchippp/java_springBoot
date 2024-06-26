@@ -12,7 +12,6 @@ public class JavaSpringWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(JavaSpringWebApplication.class, args);
-//        System.out.println("Hello World!");
     }
     @Bean
     public CommandLineRunner commandLineRunner(ClassRoomService classRoomService) {
@@ -23,18 +22,6 @@ public class JavaSpringWebApplication {
             deleteClass(classRoomService);
         };
     }
-//    @Bean
-//    public CommandLineRunner seedData(ClassRoomDAO classRoomDAO) {
-//        return args -> {
-//            // Check if database is empty
-//            if (classRoomDAO.getAllClassRoom().isEmpty()) {
-//                // Seed data
-//                classRoomDAO.saveClassRoom(new ClassRoom("Class A", 1));
-//                classRoomDAO.saveClassRoom(new ClassRoom("Class B", 2));
-//                classRoomDAO.saveClassRoom(new ClassRoom("Class C", 3));
-//            }
-//        };
-//    }
     private static void addNewClass(ClassRoomService classRoomDAO) {
         ClassRoom classRoom = new ClassRoom();
         classRoom.setName("A");
@@ -51,7 +38,7 @@ public class JavaSpringWebApplication {
     private static void updateClass(ClassRoomService classRoomDAO) {
         ClassRoom classRoom = classRoomDAO.getClassRoomById(1L);
         classRoom.setName("B");
-        classRoomDAO.updateClassRoom(classRoom);
+        classRoomDAO.updateClassRoom(1L, classRoom);
     }
     private static void deleteClass(ClassRoomService classRoomDAO) {
         classRoomDAO.deleteClassRoom(1L);

@@ -8,6 +8,7 @@ public interface IClassRoomService {
     public List<ClassRoom> getAllClassRoom();
     public ClassRoom getClassRoomById(Long id);
     public void saveClassRoom(ClassRoom classRoom);
-    public void updateClassRoom(ClassRoom classRoom);
-    public void deleteClassRoom(Long id);
+    public void updateClassRoom(Long id,ClassRoom classRoom);
+    public String deleteClassRoom(Long id);
+
 }

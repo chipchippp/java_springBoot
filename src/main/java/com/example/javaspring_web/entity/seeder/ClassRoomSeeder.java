@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ClassRoomSeeder implements CommandLineRunner {
-    ClassRoom classRoom;
     IClassRoomRepository classRoomRepository;
     Faker faker = new Faker();
 
@@ -21,7 +20,6 @@ public class ClassRoomSeeder implements CommandLineRunner {
     }
 
     private void createUsers() {
-        boolean nameExisting = false;
         for (int i = 0; i < 10; i++) {
             ClassRoom classRoom = new ClassRoom();
             classRoom.setName(faker.name().firstName());
